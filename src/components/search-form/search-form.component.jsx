@@ -12,30 +12,20 @@ class SearchForm extends React.Component {
     };
   }
 
-  handleInputChange = e => {
-    // Sets the value of this.state.searchInput
-    this.setState({
-      searchInput: e.target.value
-    });
-  };
-
-  handleSortChange = e => {
-    this.setState({
-      sortBy: e.target.value
-    });
-  };
-
-  handleLimitChange = e => {
-    this.setState({
-      limit: e.target.value
-    });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
+    // For testing purposes only
     alert(
-      `The search input value is ${this.state.searchInput} ${this.state.sortBy} ${this.state.limit}`
+      `The search input values are ${this.state.searchInput}, ${this.state.sortBy}, ${this.state.limit}`
     );
+
+    // Search Reddit API with state data
+    //prettier-ignore
+    fetch(`http://www.reddit.com/search.json?q=${this.state.searchInput}&sort=${this.state.sortBy}&limit=${this.state.limit}`)
+    .then(res => res.json()) // parse result into json data format
+    .then(json => json.data.children.map(data => data.data))
+    .then(myJson => console.log(myJson))
+    .catch(err => console.log(err));
   };
 
   render() {
@@ -49,7 +39,7 @@ class SearchForm extends React.Component {
           type="text"
           name="name"
           placeholder="Search Topic.."
-          onChange={this.handleInputChange}
+          onChange={e => this.setState({ searchInput: e.target.value })}
           value={this.state.searchInput}
           required
         />
@@ -61,7 +51,7 @@ class SearchForm extends React.Component {
             className="select-input"
             name="sortby"
             id="sortby"
-            onChange={this.handleSortChange}
+            onChange={e => this.setState({ sortBy: e.target.value })}
             value={this.state.sortBy}
           >
             <option selected disabled hidden>
@@ -78,7 +68,7 @@ class SearchForm extends React.Component {
             className="select-input"
             name="limit"
             id="limit"
-            onChange={this.handleLimitChange}
+            onChange={e => this.setState({ limit: e.target.value })}
             value={this.state.limit}
           >
             <option selected disabled hidden>
