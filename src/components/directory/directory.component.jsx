@@ -1,6 +1,8 @@
 import React from "react";
 import MenuItem from "../menu-item/menu-item.component";
 import "./directory.styles.scss";
+//import Reddit from "../../reddit-data.js";
+// reddit.search(searchTerm, searchLimit, sortBy)
 
 class Directory extends React.Component {
   constructor() {

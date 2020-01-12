@@ -32,15 +32,26 @@
     }
 
     .subtitle {
-      display: flex;
-      align-items: center;
-      padding: 0 25px;
+      display: grid;
+      grid-template-columns: 8fr 2fr;
       font-weight: bold;
       font-size: 12px;
       color: #a8a8a8;
-      background: #fff;
+      background-color: #fff;
 
-      text-transform: uppercase;
+      &-left {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 0 25px;
+        word-spacing: 5px;
+      }
+
+      &-right {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
     }
   }
 }
